@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using programavimoTiltas.Data;
 using System.Linq;
+using Tiltai.Services;
 
 namespace programavimoTiltas.Controllers
 {
@@ -10,18 +11,18 @@ namespace programavimoTiltas.Controllers
 
 
         private readonly DataModelContext dataModelContext;
+        private readonly ICustomerService customerService;
 
-        public CustomerController(DataModelContext dataModelContext)
+        public CustomerController(DataModelContext dataModelContext, ICustomerService customerService)
         {
             this.dataModelContext = dataModelContext;
+            this.customerService = customerService;
         }
-        //GET quotation
-        [Route("")]
+        
         [HttpGet]
         public IQueryable<Customer> GetAll()
         {
-
-            return dataModelContext.Customers;
+            return customerService.GetAll();
         }
     }
 }

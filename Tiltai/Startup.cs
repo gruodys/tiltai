@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using programavimoTiltas.Data;
 using Microsoft.EntityFrameworkCore;
+using Tiltai.Services;
 
 namespace Tiltai
 {
@@ -27,9 +28,12 @@ namespace Tiltai
 
             services.AddMvc();
 
-            services.AddDbContext<DataModelContext>(options =>
+            services
+                .AddEntityFrameworkSqlServer()
+                .AddDbContext<DataModelContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-s        }
+            services.AddTransient<ICustomerService, CustomerService>();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

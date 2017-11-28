@@ -1,0 +1,31 @@
+﻿<h1>
+    Klientai
+    <a (click)="haha()" class="btn btn-info btn-lg pull-right">
+        <span class="glyphicon glyphicon-plus-sign"></span> Plus
+    </a>
+</h1>
+<div class="form-group">
+    <input type="text" placeholder="Pavadinimas" class="form-control" />
+
+</div>
+
+<p *ngIf="!customers"><em>Loading...</em></p>
+
+<table class='table' *ngIf="customers">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Pavadinimas</th>
+            <th>Įmonės kodas</th>
+            <th>Sukūrimo data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers">
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.code }}</td>
+            <td>{{ customer.createDate | date}}</td>
+        </tr>
+    </tbody>
+</table>
